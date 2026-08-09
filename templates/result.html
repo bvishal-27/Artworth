@@ -1,0 +1,253 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>ArtWorth AI — Result</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: "Segoe UI", Arial, sans-serif; color:#fff;
+      background: linear-gradient(90deg, rgba(5,12,24,0.9), rgba(8,25,44,0.9)), url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    }
+    header{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.6);padding:12px 0;z-index:1000}
+    nav{display:flex;justify-content:center;gap:20px}
+    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px}
+    .container{max-width:1100px;margin:120px auto;padding:0 18px}
+    .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);margin-bottom:16px}
+    table{width:100%;border-collapse:collapse;color:#fff}
+    td,th{padding:10px;border-bottom:1px solid rgba(255,255,255,0.04)}
+    .result-box{display:flex;gap:18px;align-items:center}
+    .badge{background:#ffd166;color:#052034;padding:8px 14px;border-radius:10px;font-weight:700}
+    .tier-low{background:rgba(255,100,100,0.12);color:#ff8a80;padding:8px 14px;border-radius:8px}
+    .tier-med{background:rgba(255,220,100,0.08);color:#ffd166;padding:8px 14px;border-radius:8px}
+    .tier-high{background:rgba(120,255,180,0.08);color:#7ef0ae;padding:8px 14px;border-radius:8px}
+    .muted{color:#dbe8ff}
+    .btn{display:inline-block;padding:10px 12px;background:#ffd166;color:#052034;border-radius:9px;text-decoration:none;font-weight:700}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/prediction">Prediction</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/visualize">Visualize</a>
+      <a href="/project_info">Project Info</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Valuation Result</h1>
+      <p class="muted">Below are the inputs you provided and the relative valuation result produced by ArtWorth AI.</p>
+
+      <h2 style="margin-top:16px">Provided Inputs</h2>
+      <table>
+        <tbody>
+          {% for k,v in inputs.items() %}
+            <tr><th style="text-align:left;width:40%">{{ k }}</th><td>{{ v }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Prediction Summary</h2>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <div>
+          <p style="margin-bottom:8px">Relative Value Index</p>
+          <div class="badge" style="font-size:20px">{{ index_value }}</div>
+        </div>
+
+        <div>
+          <p style="margin-bottom:8px">Tier</p>
+          {% if tier == "High" %}
+            <div class="tier-high">{{ tier }}</div>
+          {% elif tier == "Medium" %}
+            <div class="tier-med">{{ tier }}</div>
+          {% else %}
+            <div class="tier-low">{{ tier }}</div>
+          {% endif %}
+        </div>
+
+        <div>
+          <p style="margin-bottom:8px">Confidence</p>
+          <div style="font-weight:700;font-size:18px">{{ confidence }}%</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <p>{{ sentence }}</p>
+      </div>
+
+      <div style="margin-top:14px">
+        <a class="btn" href="/prediction">Predict Another</a>
+        <a class="btn" style="background:#00c4ff;color:#012; margin-left:8px" href="/visualize">View Visuals</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Notes & Next Steps</h2>
+      <ul class="muted">
+        <li>The Relative Value Index is an abstract score learned from historical data — it is <strong>not</strong> a currency quotation.</li>
+        <li>Tier boundaries are computed from dataset percentiles; values are comparative across the dataset distribution.</li>
+        <li>Confidence is estimated from model ensemble dispersion (higher → more agreement among trees).</li>
+        <li>For production valuations you should add provenance verification, currency normalization, and image-based aesthetic signals.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer style="padding:12px;text-align:center;background:rgba(0,0,0,0.45);margin-top:18px">
+    Made by Rahul MCA • ArtWorth AI • © 2025 All Rights Reserved
+  </footer>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>ArtWorth AI — Result</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: "Segoe UI", Arial, sans-serif; color:#fff;
+      background: linear-gradient(90deg, rgba(5,12,24,0.9), rgba(8,25,44,0.9)), url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    }
+    header{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.6);padding:12px 0;z-index:1000}
+    nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,0.05)}
+    .container{max-width:1100px;margin:120px auto;padding:0 18px}
+    .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);margin-bottom:18px}
+    table{width:100%;border-collapse:collapse;color:#fff}
+    td,th{padding:10px;border-bottom:1px solid rgba(255,255,255,0.04)}
+    h1{font-size:28px;margin-bottom:6px;color:#fff}
+    h2{font-size:22px;margin:10px 0;color:#ffd166}
+    .muted{color:#dbe8ff;font-size:15px}
+    ul{margin-left:22px;line-height:1.7}
+    .bullet{display:flex;align-items:center;margin-bottom:8px}
+    .bullet img{width:22px;height:22px;margin-right:8px}
+    .btn{display:inline-block;padding:10px 14px;background:#ffd166;color:#052034;border-radius:9px;text-decoration:none;font-weight:700;margin:4px 6px 0 0}
+    .btn.alt{background:#00c4ff;color:#012}
+    .grid{display:grid;grid-template-columns: repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:12px}
+    .card-inner{background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:14px}
+    .logo{width:20px;height:20px;margin-right:6px;vertical-align:middle}
+    footer{padding:12px;text-align:center;background:rgba(0,0,0,0.45);margin-top:24px}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/prediction">Prediction</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/visualize">Visualize</a>
+      <a href="/project_info">Project Info</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Layer 1: Provided Inputs -->
+    <section class="card">
+      <h1>Valuation Result</h1>
+      <p class="muted">Below are the inputs you provided and the relative valuation result produced by ArtWorth AI.</p>
+
+      <h2 style="margin-top:16px">Provided Inputs</h2>
+      <table>
+        <tbody>
+          {% for k,v in inputs.items() %}
+            <tr><th style="text-align:left;width:40%">{{ k }}</th><td>{{ v }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Layer 2: Prediction Summary -->
+    <section class="card">
+      <h2>Prediction Summary</h2>
+      <ul>
+        <li class="bullet"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="index"/> <strong>Relative Value Index:</strong> {{ index_value }}</li>
+        <li class="bullet"><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="tier"/> <strong>Tier:</strong> {{ tier }}</li>
+        <li class="bullet"><img src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png" alt="confidence"/> <strong>Confidence:</strong> {{ confidence }}%</li>
+      </ul>
+      <div style="margin-top:12px">
+        <p>{{ sentence }}</p>
+      </div>
+      <div style="margin-top:14px">
+        <a class="btn" href="/prediction">Predict Another</a>
+        <a class="btn alt" href="/visualize">View Visuals</a>
+      </div>
+    </section>
+
+    <!-- Layer 3: Why predicted as this tier -->
+    <section class="card">
+      <h2>Why predicted as {{ tier }} tier?</h2>
+      <ul>
+        {% for reason in reasons %}
+          <li class="bullet"><img class="logo" src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="reason"> {{ reason }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- Layer 4: Top 10 real-world factors -->
+    <section class="card">
+      <h2>Top 10 factors influencing artwork value</h2>
+      <div class="grid">
+        {% for factor in factors %}
+          <div class="card-inner">
+            <img class="logo" src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="point"> {{ factor }}
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Layer 5: Suggested Tips -->
+    <section class="card">
+      <h2>Tips for Improving Artwork Value</h2>
+      <div class="grid">
+        {% for tip in tips %}
+          <div class="card-inner">
+            <img class="logo" src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="tip"> {{ tip }}
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Layer 6: Notable Auction Houses / Galleries -->
+    <section class="card">
+      <h2>Recommended Auction Houses & Galleries</h2>
+      <div class="grid">
+        {% for h in galleries %}
+        <div class="card-inner">
+          <img class="logo" src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="house">
+          <b><a href="{{ h.url }}" target="_blank" style="color:#fff; text-decoration:underline;">{{ h.name }}</a></b>
+          <p class="muted">{{ h.note }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Layer 7: Notes & Next Steps -->
+    <section class="card">
+      <h2>Notes & Next Steps</h2>
+      <ul class="muted">
+        <li>The Relative Value Index is an abstract score learned from historical data — it is <strong>not</strong> a currency quotation.</li>
+        <li>Tier boundaries are computed from dataset percentiles; values are comparative across the dataset distribution.</li>
+        <li>Confidence is estimated from model ensemble dispersion (higher → more agreement among trees).</li>
+        <li>For production valuations you should add provenance verification, currency normalization, and image-based aesthetic signals.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Made by B Vishal M.Tech • ArtWorth AI • © 2026 All Rights Reserved
+  </footer>
+</body>
+</html>

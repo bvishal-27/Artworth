@@ -1,0 +1,205 @@
+Column-by-column explanation
+
+I'll list each column, its data type (from the CSV), example values, and interpretation / recommended handling.
+
+Artwork_Name
+
+Type: text (string)
+
+Examples: e.g. Abstract_Alex_12 (synthetic naming created when we enhanced the dataset)
+
+Meaning: identifier/name of the work. Useful for indexing and de-dup checks; you can optionally extract tokens (e.g., style prefix) but avoid using the raw name as a predictive feature unless you convert it to useful signals (artist, series, year if embedded).
+
+Artist Name
+
+Type: text (string)
+
+Examples / top values: displayed in the “first 10 rows” and summary tables.
+
+Meaning / handling: categorical. Best encoded as either:
+
+target encoder (mean price per artist), or
+
+frequency encoding (artist popularity), or
+
+embedding (if many unique artists and you plan neural nets).
+
+Note: artist identity is a powerful signal for price; frequent artists with high mean price usually strongly increase value.
+
+Artist Reputation
+
+Type: numeric (float)
+
+Observed Scale: see numeric stats table — e.g., min / max / mean (I displayed these).
+
+Interpretation: In this enhanced file the values are numeric and appear as a continuous score. If you see values like 0.30, that most likely represents a normalized reputation score between 0 and 1 (but check the min/max in the numeric summary to confirm).
+
+If the column min ≥ 0 and max ≤ 1 → it's normalized probability/style reputation.
+
+If max >> 1 (e.g., up to 100), it may be a percentage/score out of 100.
+
+How to use: treat as numeric; higher → typically increases predicted price.
+
+Sculpture_Type
+
+Type: categorical (string)
+
+Examples: Abstract, Classical, Modern, Contemporary, Renaissance, Minimalist, Baroque
+
+Meaning / handling: style or category of sculpture. Use one-hot or target/frequency encoding. Some types (Renaissance, Classical) often have higher valuations historically.
+
+Material
+
+Type: categorical (string)
+
+Top values & counts: shown in the Material counts table.
+
+Examples: Bronze, Marble, Wood, Stone, Bronze-Plated, etc.
+
+Meaning / handling: key intrinsic feature — certain materials (marble, bronze) command higher prices. Consider grouping rare materials or small-count categories into “Other” or by material class (metal, stone, organic).
+
+Height
+
+Type: numeric (float)
+
+Units: not explicitly present in file. The original dataset did not include units; typical assumptions are centimeters (cm) or inches. You should confirm units from source metadata — if unsure, treat as relative scale (bigger → likely more expensive) or convert to a normalized dimension (e.g., volume proxy).
+
+Stats: min/max/mean in numeric table. Use these to determine typical sizes.
+
+Width
+
+Type: numeric (float)
+
+Same unit caveats as Height.
+
+Weight
+
+Type: numeric (float)
+
+Units: again not specified (kilograms or pounds). Inspect values: if typical weights are small decimals, could be tons? See numeric stats to guess. If you see values like 5.0, it's likely kg; if 1000 maybe grams or grams? (Check distribution).
+
+Meaning: heavier pieces made of denser expensive materials often cost more, but not universally.
+
+Creation_Year
+
+Type: integer (numeric)
+
+Range: 1850–2020 in the synthetic generation; see stats table.
+
+Meaning: year artwork was created. Convert to age (you already have Artwork_Age) or use as-is. Older often => more valuable, but depends on artist/era.
+
+Artwork_Age
+
+Type: numeric (integer)
+
+Meaning: 2025 (current year) minus creation year. Use as numeric feature; older often increases value, but the relationship may be non-linear (very old might be more valuable; very recent works less so).
+
+Artist_Alive
+
+Type: categorical (Yes/No)
+
+Meaning: if No (artist deceased) usually scarcity and estate interest may raise price; Yes could mean potential future output (affecting pricing dynamics). Encode as binary.
+
+Aesthetic_Descriptor
+
+Type: categorical (string, keywords)
+
+Examples: Elegant, Intricate, Minimal, Vibrant, Rustic, Polished, Expressive
+
+Meaning / handling: subjective aesthetic tags. Use one-hot or embed them (they can supply stylistic signal correlated with price).
+
+Provenance
+
+Type: categorical (string)
+
+Examples: Private Collection, Museum Deaccession, Inherited Estate, Gallery Exhibition, Auctioned in London, Auctioned in New York, Acquired from Artist
+
+Meaning: provenance strongly affects value — museum provenance or notable auctions usually raise price significantly. Use categorical encoding or map to a “provenance quality” ordinal scale.
+
+Previous_Auction_Price
+
+Type: numeric (float)
+
+Meaning: historical sale price — a direct, strong predictor of current value. If present and reliable, this often dominates model performance.
+
+Note on units/currency: there is no currency unit metadata in the file. Values are numeric amounts; you must confirm whether they’re INR, USD, EUR, etc. If multiple currencies are mixed, you must normalize to a single currency using exchange rates or a currency column.
+
+Price
+
+Type: numeric (float) — this is the suggested target/output.
+
+Interpretation / units: the dataset does not include currency metadata. Check the numeric scale: if prices are often in the thousands or tens of thousands, it’s likely USD or INR depending on source. Be explicit: do not assume a currency in your model; add a Currency column or document the assumed currency (e.g., “Prices are in USD”) if you can verify it.
+
+Special notes about units & scales (currency, size, reputation)
+
+Currency (Price / Previous_Auction_Price): Not specified in CSV. I cannot reliably tell if Price is INR, USD, or other. Look at the original Kaggle dataset page or metadata to confirm. If you cannot verify, treat the numeric values as relative values and train a model that predicts relative price; or add a Currency column and normalize prices to a single currency using historical exchange rates.
+
+Dimensions (Height/Width/Weight): Also not specified. Check original dataset doc. If impossible, treat them as consistent units across the file (i.e., all heights in same unit) and use them as relative size features. If you plan to publish or compare to market prices, resolving units is essential.
+
+Artist Reputation (0.30 example): Check the numeric stats table I displayed — if Artist Reputation min ≈ 0.0 and max ≈ 1.0 then 0.30 means a reputation score of 30% on whatever metric was used. It could be calculated from past sales volume, social indicators, gallery representation, etc. If the max is >1, reinterpret accordingly.
+
+Which features drive price up (guided, not guaranteed)
+
+These are general domain rules and what I'd expect the model to learn as positive predictors of price:
+
+Most likely increase price:
+
+Higher Artist Reputation — stronger signal and generally highest impact.
+
+Previous_Auction_Price — if previous sale price is high, current price likely high.
+
+Provenance = Museum Deaccession / Notable Auction / Private Collector — strong premium.
+
+Material = Marble / Bronze / Precious metal — valuable materials command higher prices.
+
+Sculpture_Type = Renaissance / Classical / Baroque — historical styles typically fetch higher values compared to ‘Minimalist’ or mass-produced modern works.
+
+Older Artwork_Age (true for certain eras & artists) — antique pieces often sell for more.
+
+Large dimensions or high weight (for certain materials) — bigger works often cost more (but shipping costs and practicality can reduce this).
+
+Aesthetic_Descriptor = Intricate / Expressive / Polished — subjective but can correlate with price.
+
+Possible decrease price:
+
+Artist_Alive = Yes for certain artists with low reputation (contemporary, unproven artists).
+
+Provenance = Unknown / Acquired from Artist (if via direct sale at low price) — may be lower.
+
+Material = Wood or Low-cost composite — cheaper than marble/bronze.
+
+Very small or very large impractical sizes — interior market preference may vary; extreme outliers sometimes reduce marketability.
+
+Poor provenance / no auction history — uncertainty lowers buyer willingness.
+
+Caveat: the actual learned relationships depend on data patterns; the above are domain priors.
+
+Which columns are inputs vs output for modeling
+
+Primary Output (target): Price (numeric).
+
+Strong inputs (recommended): Previous_Auction_Price, Artist Reputation, Artist Name (encoded), Material, Sculpture_Type, Artwork_Age (or Creation_Year), Provenance.
+
+Secondary inputs (helpful): Height, Width, Weight, Aesthetic_Descriptor, Artist_Alive.
+
+Avoid using: Artwork_Name raw string (unless tokenized to useful parts), identifiers.
+
+Watch out for leakage: If any column was generated partially from price (e.g., shipping fees derived from price), don't use it as a feature. In your enhanced file we avoided shipping fields, but always check the provenance of features in real datasets.
+
+Quick practical recommendations for training
+
+Confirm currency & units. If unknown, treat the target as relative or add a currency normalization step.
+
+Log-transform price(s) (e.g., log1p(Price)) — auction prices are heavily skewed; log transforms often stabilize variance and help regression models.
+
+Encode categorical vars carefully: Artist Name → target or frequency encoding; Material, Sculpture_Type, Provenance → one-hot or embedding.
+
+Impute missing values: numeric columns with median; categorical with “Unknown” or “Other”.
+
+Feature engineering: derive Volume ≈ Height * Width * depth (depth isn't present — consider approximating using weight and density if possible). Use Price / Area or Price / Weight as extra derived features.
+
+Baseline models: Linear Regression and Random Forest; then try XGBoost/LightGBM; for interpretable explanations use SHAP.
+
+Evaluation: use RMSE, MAE on raw scale and also on log-scale (log-RMSE), and report R². For price ranges, you can train quantile regressors (e.g., Gradient Boosting with quantile objective) to provide prediction intervals/confidence.
+
+Explainability: use SHAP to produce per-sample explanatory features and to show which comparable sales (closest Previous_Auction_Price rows) influenced the prediction.

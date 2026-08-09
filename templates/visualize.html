@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>ArtWorth AI — Visualization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI",Arial,sans-serif;color:#fff;
+      background:linear-gradient(90deg,rgba(15,15,35,0.9),rgba(10,25,55,0.9)),
+      url("https://images.unsplash.com/photo-1524492449090-1a065f3a23a6?q=80&w=1600&auto=format&fit=crop") center/cover no-repeat;
+    }
+    header{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.65);padding:12px 0;z-index:1000}
+    nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,0.05)}
+    .container{max-width:1100px;margin:120px auto;padding:0 18px}
+    .card{background:rgba(255,255,255,0.05);padding:20px;border-radius:14px;
+          border:1px solid rgba(255,255,255,0.08);margin-bottom:22px}
+    h1{font-size:28px;margin-bottom:12px;color:#ffd166}
+    h2{font-size:22px;margin-bottom:12px;color:#06d6a0}
+    .muted{color:#d0e6ff;font-size:15px;line-height:1.6}
+    img.graph{width:100%;border-radius:10px;margin-top:10px;box-shadow:0 3px 10px rgba(0,0,0,0.4)}
+    .bullet{display:flex;align-items:center;margin:6px 0}
+    .bullet img{width:22px;height:22px;margin-right:8px}
+    footer{padding:12px;text-align:center;background:rgba(0,0,0,0.5);margin-top:24px}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/prediction">Prediction</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/visualize">Visualize</a>
+      <a href="/project_info">Project Info</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Model Training Visualizations</h1>
+    <p class="muted">Below are dynamic visual insights generated from the ArtWorth AI training process and evaluation.</p>
+
+    <!-- Accuracy -->
+    <section class="card">
+      <h2><img src="https://cdn-icons-png.flaticon.com/512/709/709699.png" width="26"/> Accuracy Curve</h2>
+      <img class="graph" src="{{ graphs['accuracy'] }}" alt="Accuracy Curve">
+      <p class="muted">{{ explanations['accuracy'] }}</p>
+    </section>
+
+    <!-- Loss -->
+    <section class="card">
+      <h2><img src="https://cdn-icons-png.flaticon.com/512/633/633682.png" width="26"/> Loss Curve</h2>
+      <img class="graph" src="{{ graphs['loss'] }}" alt="Loss Curve">
+      <p class="muted">{{ explanations['loss'] }}</p>
+    </section>
+
+    <!-- Confidence -->
+    <section class="card">
+      <h2><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" width="26"/> Confidence Distribution</h2>
+      <img class="graph" src="{{ graphs['confidence'] }}" alt="Confidence Distribution">
+      <p class="muted">{{ explanations['confidence'] }}</p>
+    </section>
+
+    <!-- Comparison -->
+    <section class="card">
+      <h2><img src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png" width="26"/> Model Comparison</h2>
+      <img class="graph" src="{{ graphs['comparison'] }}" alt="Model Comparison">
+      <p class="muted">{{ explanations['comparison'] }}</p>
+    </section>
+  </main>
+
+  <footer>
+    Made by  B Vishal M.Tech • ArtWorth AI • © 2026 All Rights Reserved
+  </footer>
+</body>
+</html>

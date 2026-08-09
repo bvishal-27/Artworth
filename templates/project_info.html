@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project Info • ArtWorth AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: Arial, sans-serif; color:#fff;
+      background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop'); 
+      background-size: cover; background-attachment: fixed; background-position:center;
+    }
+    header { width:100%; background:#333; padding:15px 0; position:fixed; top:0; left:0; z-index:1000; }
+    nav { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; }
+    nav a { color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; transition:.3s; }
+    nav a:hover { background:#555; }
+    .container { max-width:1100px; margin:120px auto 80px; padding:20px; }
+    .section {
+      background:rgba(0,0,0,0.65);
+      border:1px solid rgba(255,255,255,0.2);
+      border-radius:16px;
+      padding:32px;
+      margin-bottom:30px;
+      backdrop-filter: blur(6px);
+    }
+    h1,h2 { color:#ffcc00; margin-bottom:14px; }
+    p,li { line-height:1.8; margin-bottom:10px; }
+    ul { margin-left:20px; }
+    code {
+      background: rgba(255,255,255,0.1);
+      padding:8px 12px;
+      border-radius:6px;
+      display:block;
+      white-space: pre-wrap;
+      margin:10px 0;
+      color:#00ffea;
+    }
+    .logo { width:40px; vertical-align:middle; margin-right:10px; }
+    footer { background:#111; text-align:center; padding:18px; margin-top:40px; }
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/about">About Us</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/visualize">Visualize</a>
+    <a href="/project_info">Project Info</a>
+  </nav>
+</header>
+
+<main class="container">
+  <!-- Layer 1 -->
+  <section class="section">
+    <h1><img class="logo" src="https://cdn-icons-png.flaticon.com/512/906/906334.png" /> Project Information</h1>
+    <p>
+      <b>ArtWorth AI</b> is an intelligent valuation system designed specifically for sculptural artifacts. 
+      Unlike conventional price prediction engines, ArtWorth AI integrates multiple dimensions of an artwork, including 
+      <b>aesthetic features, historical significance, material quality, and artist reputation</b>. 
+      The project’s central aim is to provide a <b>data-driven, transparent, and consistent valuation model</b> 
+      that empowers collectors, curators, auction houses, and even casual art investors to understand the 
+      relative worth of sculptures. By treating prices as relative indices, our model focuses on ranking and 
+      categorization instead of attempting to provide exact monetary currency values, thereby avoiding the pitfalls 
+      of inconsistent datasets and undocumented currency units.
+    </p>
+  </section>
+
+  <!-- Layer 2 -->
+  <section class="section">
+    <h2><img class="logo" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" /> Problem Statement</h2>
+    <p>
+      The art market is notorious for its lack of transparency. Prices are influenced not only by intrinsic 
+      qualities of the artwork but also by speculative demand, inconsistent documentation, and regional biases. 
+      Sculptural artifacts, in particular, suffer from additional challenges: varying material costs, 
+      differences in preservation, and the subjective weight of cultural symbolism. Traditional valuation 
+      methods rely heavily on expert opinions, which, while valuable, are often subjective, inconsistent, 
+      and inaccessible to emerging collectors. <br><br>
+      This project addresses these pain points by <b>introducing a machine learning framework that standardizes 
+      valuation across multiple features</b>. It bridges the gap between human expertise and data-driven analysis, 
+      offering a relative valuation model that categorizes works into <b>Low, Medium, or High tiers of market worth</b>. 
+      This democratizes access to art valuation, making it accessible beyond elite circles.
+    </p>
+  </section>
+
+  <!-- Layer 3 -->
+  <section class="section">
+    <h2><img class="logo" src="https://cdn-icons-png.flaticon.com/512/1027/1027012.png" /> Dataset Used</h2>
+    <p>
+      The dataset powering ArtWorth AI was sourced from curated online repositories and enhanced manually 
+      to include <b>aesthetic descriptors, provenance, and artist-level attributes</b>. The dataset covers: 
+    </p>
+    <ul>
+      <li>Artist reputation scores normalized between 0–1</li>
+      <li>Physical dimensions (height, width, weight)</li>
+      <li>Artwork creation year and derived artwork age</li>
+      <li>Sculpture type and material details</li>
+      <li>Previous auction history and price benchmarks</li>
+      <li>Aesthetic descriptors capturing visual style</li>
+      <li>Provenance data including ownership and exhibition history</li>
+    </ul>
+    <p>
+      Although absolute currency information is missing, our approach treats all numeric values as 
+      <b>relative indicators</b>, allowing the model to focus on proportional differences across works. 
+      This ensures the predictions remain meaningful even in the absence of standardized currencies.
+    </p>
+  </section>
+
+  <!-- Layer 4 -->
+  <section class="section">
+    <h2><img class="logo" src="https://cdn-icons-png.flaticon.com/512/1995/1995569.png" /> Machine Learning Models</h2>
+    <p>
+      Two machine learning regressors were evaluated: <b>Random Forest Regressor</b> and 
+      <b>Gradient Boosting Regressor</b>. Both were integrated within a preprocessing pipeline that 
+      handled categorical encoding, missing value imputation, and feature scaling. <br><br>
+      Random Forest provided robust baseline performance due to its ability to capture 
+      non-linear interactions and feature importance. Gradient Boosting, on the other hand, 
+      offered finer control and often outperformed in terms of R² score on the validation split. 
+      GridSearchCV was employed to fine-tune hyperparameters for both models. Ultimately, 
+      the <b>best-performing pipeline</b> was saved as the deployable model.
+    </p>
+  </section>
+
+  <!-- Layer 5 -->
+  <section class="section">
+    <h2><img class="logo" src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" /> System Workflow</h2>
+    <ul>
+      <li><b>Step 1:</b> User enters sculpture attributes (dimensions, material, artist details) into the web form.</li>
+      <li><b>Step 2:</b> Data is validated, processed, and transformed into numerical and categorical features.</li>
+      <li><b>Step 3:</b> The trained ML model predicts a relative index value.</li>
+      <li><b>Step 4:</b> Index value is mapped into a Low/Medium/High valuation tier.</li>
+      <li><b>Step 5:</b> Confidence scores are generated using ensemble dispersion or perturbation testing.</li>
+      <li><b>Step 6:</b> Results are displayed with tier explanations, influencing factors, and practical tips.</li>
+    </ul>
+  </section>
+
+  <!-- Layer 6 -->
+  <section class="section">
+    <h2><img class="logo" src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" /> Explainability & Visualizations</h2>
+    <p>
+      To ensure trust and usability, ArtWorth AI provides <b>confidence estimates</b> alongside each prediction. 
+      For ensemble models like Random Forest, standard deviation across trees is translated into a confidence score. 
+      For other models, perturbation-based stability testing is applied. <br><br>
+      In addition, visualization modules (accessible through the Visualize tab) provide insights into:
+      <ul>
+        <li>Accuracy vs. loss trends during training</li>
+        <li>Model confidence across predictions</li>
+        <li>Comparisons between predicted and actual indices</li>
+      </ul>
+      These visualizations help stakeholders understand not only the prediction itself 
+      but also the <b>reliability of the prediction</b>.
+    </p>
+  </section>
+
+  <!-- Layer 7 -->
+  <section class="section">
+    <h2><img class="logo" src="https://cdn-icons-png.flaticon.com/512/4762/4762311.png" /> Real-World Applications</h2>
+    <p>
+      ArtWorth AI has significant applications across multiple sectors: 
+    </p>
+    <ul>
+      <li><b>Auction Houses:</b> Pre-screening sculptures and providing estimated valuation tiers.</li>
+      <li><b>Museums & Galleries:</b> Understanding relative importance of artifacts in exhibitions.</li>
+      <li><b>Private Collectors:</b> Making informed purchasing or selling decisions with confidence scores.</li>
+      <li><b>Academic Research:</b> Providing data-driven insight into valuation patterns across cultures.</li>
+      <li><b>Insurance Companies:</b> Assigning relative risk/coverage policies based on artwork tiering.</li>
+    </ul>
+    <p>
+      By bridging art expertise with machine learning, the project contributes to <b>market transparency, 
+      collector empowerment, and preservation of cultural heritage</b>.
+    </p>
+  </section>
+
+  <!-- Layer 8 -->
+  <section class="section">
+    <h2><img class="logo" src="https://cdn-icons-png.flaticon.com/512/1034/1034150.png" /> Deployment & Code Examples</h2>
+    <p>
+      The project is deployed as a <b>Flask-based web application</b>. 
+      Below is a simplified workflow of training and deployment code.
+    </p>
+
+    <h3>train.py (Model Training & Saving)</h3>
+    <code>
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.pipeline import Pipeline
+import joblib
+# Load data, preprocess features, train model
+model = Pipeline(steps=[('preprocessor', preprocessor),
+                        ('model', RandomForestRegressor())])
+model.fit(X_train, y_train)
+joblib.dump(model, "best_model.pkl")
+    </code>
+
+    <h3>app.py (Flask Deployment)</h3>
+    <code>
+from flask import Flask, render_template, request
+import joblib, pandas as pd
+app = Flask(__name__)
+model = joblib.load("best_model.pkl")
+@app.route("/predict", methods=["POST"])
+def predict():
+    df_input = parse_input(request.form)
+    pred_value = model.predict(df_input)[0]
+    return render_template("result.html", prediction=pred_value)
+    </code>
+
+    <p>
+      Users interact with a clean UI, input sculpture details, and receive predictions with tier explanations 
+      and supporting graphs. This workflow ensures the application is not just technically robust, 
+      but also <b>usable and informative</b> for end-users.
+    </p>
+  </section>
+</main>
+
+<footer>
+  Made by BKIT M.tech Student | © 2026 All rights reserved.
+</footer>
+</body>
+</html>

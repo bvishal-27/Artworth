@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>ArtWorth AI — Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Segoe UI",Arial,sans-serif;color:#fff;
+      background: linear-gradient(90deg, rgba(10,25,45,0.9), rgba(18,38,65,0.9)),
+      url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    }
+    header{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.6);padding:12px 0;z-index:1000}
+    nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,0.05)}
+    .container{max-width:800px;margin:120px auto;padding:0 18px}
+    .card{background:rgba(255,255,255,0.04);padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.05)}
+    h1{font-size:30px;margin-bottom:12px;color:#ffd166}
+    label{display:block;margin-top:12px;color:#ffd166;font-weight:600}
+    input,textarea{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:none;outline:none;background:rgba(255,255,255,0.08);color:#fff}
+    input:focus,textarea:focus{background:rgba(255,255,255,0.12)}
+    textarea{resize:none;height:100px}
+    .btn{margin-top:14px;padding:12px 20px;background:#ffd166;color:#052034;border:none;border-radius:9px;font-weight:700;cursor:pointer}
+    .btn:hover{background:#ffc93c}
+    .icon{width:22px;height:22px;vertical-align:middle;margin-right:6px}
+    footer{padding:12px;text-align:center;background:rgba(0,0,0,0.45);margin-top:24px}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/prediction">Prediction</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/visualize">Visualize</a>
+      <a href="/project_info">Project Info</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Contact Us</h1>
+      <form method="POST" action="/contact">
+        <label><img class="icon" src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="name"/> Name</label>
+        <input type="text" name="name" required>
+
+        <label><img class="icon" src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email"/> Email</label>
+        <input type="email" name="email" required>
+
+        <label><img class="icon" src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="phone"/> Phone</label>
+        <input type="text" name="phone">
+
+        <label><img class="icon" src="https://cdn-icons-png.flaticon.com/512/709/709699.png" alt="msg"/> Message</label>
+        <textarea name="message" required></textarea>
+
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    Made by B.Vishal M.Tech • ArtWorth AI • © 2026 All Rights Reserved
+  </footer>
+</body>
+</html>

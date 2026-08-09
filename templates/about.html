@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>ArtWorth AI — About</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: "Segoe UI", Arial, sans-serif; color:#fff;
+      background: linear-gradient(90deg, rgba(6,18,35,0.9), rgba(12,38,65,0.9)),
+      url('https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    }
+    header{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.6);padding:12px 0;z-index:1000}
+    nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,0.05)}
+    .container{max-width:1100px;margin:120px auto;padding:0 18px}
+    .card{background:rgba(255,255,255,0.04);padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.05);margin-bottom:20px}
+    h1{font-size:30px;margin-bottom:10px;color:#ffd166}
+    h2{font-size:22px;margin:12px 0;color:#ffd166}
+    p{line-height:1.7;font-size:16px;color:#e9f0ff}
+    ul{margin-left:20px;line-height:1.7;color:#e9f0ff}
+    .bullet{display:flex;align-items:flex-start;margin-bottom:10px}
+    .bullet img{width:26px;height:26px;margin-right:10px}
+    footer{padding:12px;text-align:center;background:rgba(0,0,0,0.45);margin-top:24px}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/prediction">Prediction</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/visualize">Visualize</a>
+      <a href="/project_info">Project Info</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Developer Details -->
+    <section class="card">
+      <h1>About the Developer</h1>
+      <div class="bullet">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="developer"/>
+        <p><b>Name:</b> B Vishal </p>
+      </div>
+      <div class="bullet">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email"/>
+        <p><b>Email:</b> b.vishal@gmail.com</p>
+      </div>
+      <div class="bullet">
+        <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="phone"/>
+        <p><b>Phone:</b> 6360768221</p>
+      </div>
+      <div class="bullet">
+        <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="project"/>
+        <p><b>Project:</b> ArtWorth AI: Intelligent Valuation Model for Sculptural Artifacts Based on Aesthetic, Historical, and Material Attributes</p>
+      </div>
+      <p style="margin-top:12px">🙏 Special thanks to my internal guide for their constant support, guidance, and encouragement throughout this project journey.</p>
+    </section>
+
+    <!-- Project Details -->
+    <section class="card">
+      <h2>About the Project</h2>
+      <div class="bullet">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="project"/>
+        <p>ArtWorth AI is an intelligent system designed to predict a <strong>relative valuation index</strong> for sculptural artworks.</p>
+      </div>
+      <p>The model integrates historical sales records, material analysis, artist reputation, artwork age, and cultural significance to generate a comparative index score. This approach avoids currency misinterpretation and provides a reliable benchmark for curators, collectors, and researchers.</p>
+      <p>Key highlights:</p>
+      <ul>
+        <li>Uses advanced machine learning ensemble models for accuracy above 90%.</li>
+        <li>Outputs a relative index score, valuation tier (Low, Medium, High), and confidence estimate.</li>
+        <li>Provides interpretability with factors influencing predictions and recommendations for value improvement.</li>
+        <li>Assists galleries, auction houses, students, and hobbyists in preliminary valuation tasks.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Made by B Vishal M.Tech • ArtWorth AI • © 2026 All Rights Reserved
+  </footer>
+</body>
+</html>
